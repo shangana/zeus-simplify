@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.leju</groupId>
+  <artifactId>mrjobsubmit</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>mrjobsubmit</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+   <dependencies>
+  	<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-client</artifactId>
+			<version>2.3.0</version>
+	</dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+      <build>  
+        <finalName>MRJobSubmit</finalName>  
+        <plugins>  
+            <plugin>  
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-jar-plugin</artifactId>  
+                <version>2.4</version>  
+                <configuration>  
+                    <archive>  
+                        <manifest>  
+                            <addClasspath>true</addClasspath>  
+                            <classpathPrefix>lib/</classpathPrefix>  
+                            <mainClass>com.leju.mrjobsubmit.MapReduceMain</mainClass>  
+                        </manifest>  
+                    </archive>  
+                </configuration>  
+            </plugin> 
+                        <!-- 拷贝依赖的jar包到lib目录 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.build.directory}/lib
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> 
+        </plugins>  
+    </build>
+</project>
